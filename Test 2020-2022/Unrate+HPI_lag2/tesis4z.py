@@ -62,8 +62,8 @@ df_group_year = (
 df_group_year = df_group_year.merge(macro_anual, on="anio", how="left")
 
 
-# Solo años train (2010-2022) para la correlación
-df = df_group_year[df_group_year["anio"].between(2010, 2022)].copy()
+# Solo años train (2007-2019) para la correlación
+df = df_group_year[df_group_year["anio"].between(2007, 2019)].copy()
 
 cols_x = ["UNRATE", "UNRATE_yoy", "MORTGAGE30US",
           "HPI_gr", "HPI_gr_lag1", "HPI_gr_lag2",
@@ -74,7 +74,7 @@ df = df[["anio", "grupo"] + cols_x + cols_y].dropna()
 
 # ── TABLA DE CORRELACIONES (Pearson y Spearman) ────────────────────────────────
 print("=" * 65)
-print("CORRELACIONES CON pd_anual_obs  (train 2010-2022, todos los grupos)")
+print("CORRELACIONES CON pd_anual_obs  (train 2007-2019, todos los grupos)")
 print("=" * 65)
 print(f"{'Variable':<18} {'Pearson':>10} {'Spearman':>11}")
 print("-" * 42)
@@ -156,7 +156,7 @@ for ax, col in zip(axes, cols_x):
     ax.grid(True, linestyle=":", alpha=0.5)
     ax.legend(fontsize=7)
 
-fig2.suptitle("Scatter plots: variables X vs pd_anual_obs  (train 2010-2022)", fontsize=11, y=1.01)
+fig2.suptitle("Scatter plots: variables X vs pd_anual_obs  (train 2007-2019)", fontsize=11, y=1.01)
 fig2.tight_layout()
 fig2.savefig(os.path.join(path_out, "corr_scatter.png"), dpi=150, bbox_inches="tight")
 print("Guardado: corr_scatter.png")
@@ -197,7 +197,7 @@ for i, col in enumerate(cols_x):
 if n_x % 2 != 0:
     axes3_flat[-1].set_visible(False)
 
-fig3.suptitle("Series temporales: variables X y pd_anual_obs de S2  (train 2010-2022)",
+fig3.suptitle("Series temporales: variables X y pd_anual_obs de S2  (train 2007-2019)",
               fontsize=11, y=1.01)
 fig3.tight_layout()
 fig3.savefig(os.path.join(path_out, "corr_timeseries.png"), dpi=150, bbox_inches="tight")
